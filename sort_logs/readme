@@ -1,0 +1,7 @@
+README
+
+Use this tool to capture the stdin and sort by a specified field
+
+Usage example:
+
+cat test.log | grep '2016-01-01' | python sort_logs.py -s ninserted -l 2
