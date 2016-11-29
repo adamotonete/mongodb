@@ -8,8 +8,10 @@ parser.add_argument("--limit", "-l", type=int, required=False, default=10)
 
 args = parser.parse_args()
 
-
-if args.sort in ['nMatched', 'nModified', 'ninserted','nscanned'] : print 'OK'
+valid_sorts = ['nMatched', 'nModified', 'docsExamined', 'ninserted','nscanned', 'nscannedObjects']
+if args.sort not in valid_sorts:
+    print 'Invalid sort, please use one of: ' + ', '.join(str(x) for x in valid_sorts)
+    exit
 
 strfilter = args.sort
 limit = args.limit
