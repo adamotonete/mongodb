@@ -28,7 +28,7 @@ for line in sys.stdin:
         output.append({'logline' : line, 'value' : metric})
     if total > limit * 2: #perform a sort and remove part of the array
         output = sorted(output, key=lambda k: int(k.get('value', 0)), reverse=True)
-        output = output[:10]
+        output = output[:limit]
         total = 0
 
 output = sorted(output, key=lambda k: int(k.get('value', 0)), reverse=True)
