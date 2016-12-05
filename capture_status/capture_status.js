@@ -13,7 +13,7 @@ if (user != null) {
 
 
 printjson(new Date())
-printjson(db.currentOp())
+printjson(db.currentOp(true))
 printjson(db.serverStatus())
 
 print('-----------------------------------------------------------------')
