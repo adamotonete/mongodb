@@ -25,7 +25,8 @@ for line in sys.stdin:
     if position > 0:
         next_space = line.find(' ',position)
         metric = line[position+len(strfilter)+1:next_space]
-        output.append({'logline' : line, 'value' : metric})
+        if metric <> '':
+	    output.append({'logline' : line, 'value' : metric})
     if total > limit * 2: #perform a sort and remove part of the array
         output = sorted(output, key=lambda k: int(k.get('value', 0)), reverse=True)
         output = output[:limit]
