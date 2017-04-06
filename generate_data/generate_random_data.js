@@ -1,5 +1,7 @@
 /* this scripts generates random data */
 
+TOTAL=10000
+
 function generateString(slimit) {
     var text = "";
     var possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -26,7 +28,7 @@ function generateTFalse() {
 
 
 
-for (var x=1;x<100;x++) {
+for (var x=1;x<TOTAL;x++) {
 	name = generateString(5)
 	lastname = generateString(15)
 	age = generateAge()
@@ -35,7 +37,7 @@ for (var x=1;x<100;x++) {
 	self_bio = generateString(100)
 	receive_sms = generateTFalse()
 	likes = []
-	likes = [generateName(3), generateName(3), generateName(3)]
+	likes = [generateString(3), generateString(3), generateString(3)]
 	db.smalcollection.save({'name' : name, 'lastname' : lastname, 'birthdate' : birthdate, 'company' : company , 
 	  'self_bio' :self_bio, 'receive_sms': receive_sms, 'likes' : likes  })
 
