@@ -1,6 +1,7 @@
 /* this scripts generates random data */
+use test
 
-TOTAL=10000
+TOTAL=1000000
 
 function generateString(slimit) {
     var text = "";
@@ -38,7 +39,7 @@ for (var x=1;x<TOTAL;x++) {
 	receive_sms = generateTFalse()
 	likes = []
 	likes = [generateString(3), generateString(3), generateString(3)]
-	db.smalcollection.save({'name' : name, 'lastname' : lastname, 'birthdate' : birthdate, 'company' : company , 
+	db.collectiontest.save({'name' : name, 'lastname' : lastname, 'birthdate' : birthdate, 'company' : company , 
 	  'self_bio' :self_bio, 'receive_sms': receive_sms, 'likes' : likes  })
 
 }
