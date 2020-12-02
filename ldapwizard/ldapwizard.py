@@ -1,5 +1,7 @@
 import sys
 
+
+
 def showConfig(_cfg):
     print('------------------------------------------------------------------------------')
     print("")
@@ -125,13 +127,13 @@ def questions():
 
     if use_userToDNMapping == "y":
         print("What LDAP attribute would you like to use to perform the authentication?")
-        if ad_ldap == "1":
+        if int(ad_ldap) == 1:
             opt = ['UserPrincipalName (person@domain.com)', 'sAMAccountName (person)']
-        if ad_ldap == "2":
+        if int(ad_ldap) == 2:
             opt = ['uid - person']
-        if ad_ldap in ["1","2"]:
-            login_attribute = numeredList(opt, 1)
-            login_method = opt[int(login_attribute) - 1].split(" ")[0].strip()
+
+        login_attribute = numeredList(opt, 1)
+        login_method = opt[int(login_attribute) - 1].split(" ")[0].strip()
 
         config["login_method"] = login_method
         valid_exit(login_attribute)
@@ -203,7 +205,7 @@ def questions():
     print("LDAP authorization requires a dedicated user to find what groups an LDAP user belongs to\n"
           "please specify the user that mongodb will use to bind the communicate to LDAP server")
 
-    if ad_ldap == "1":
+    if int(ad_ldap) == 1:
         print('Microsoft Active directory allows either the Distinguished Name or the UserPrincipalName')
         bind_user = textbox("","user@" + domain)
         config["bind_user"] = bind_user
@@ -227,3 +229,4 @@ def questions():
 if __name__ == '__main__':
      questions()
 
+# See PyCharm help at https://www.jetbrains.com/help/pycharm/
