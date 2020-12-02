@@ -173,6 +173,17 @@ def questions():
             group_search = textbox("OU=Groups," + dcDomain(domain),"")
             config["group_search"] = group_search
 
+        print("LDAP authorization requires a dedicated user to find what groups an LDAP user belongs to\n"
+              "please specify the user that mongodb will use to bind the communicate to LDAP server")
+
+        if int(ad_ldap) == 1:
+            print('Microsoft Active directory allows either the Distinguished Name or the UserPrincipalName')
+            bind_user = textbox("", "user@" + domain)
+            config["bind_user"] = bind_user
+        else:
+            print("Please specify the DistinguishedName of the user that will be used")
+            bind_user = textbox("", "e.g: DN=bind_user,OU=System Users," + dcDomain(domain))
+            config["bind_user"] = bind_user
 
     if int(ad_ldap) == 1:
         if ldap_authorization == "y":
@@ -202,17 +213,6 @@ def questions():
                     config["userToDNMapping"] = '[{match: "(.+)", ldapQuery: "' + users_group_search + \
                                                 '?dn?sub?(&(objectClass=posixAccount)(' + login_method + '={0}))"}]'
 
-    print("LDAP authorization requires a dedicated user to find what groups an LDAP user belongs to\n"
-          "please specify the user that mongodb will use to bind the communicate to LDAP server")
-
-    if int(ad_ldap) == 1:
-        print('Microsoft Active directory allows either the Distinguished Name or the UserPrincipalName')
-        bind_user = textbox("","user@" + domain)
-        config["bind_user"] = bind_user
-    else:
-        print("Please specify the DistinguishedName of the user that will be used")
-        bind_user = textbox("", "e.g: DN=bind_user,OU=System Users," + dcDomain(domain))
-        config["bind_user"] = bind_user
 
     print("Additionally to LDAP authentication, would you like to use another authenticationMechanisms?")
     authenticationMechanisms = textbox("SCRAM-SHA-256,SCRAM-SHA-1,MONGODB-X509","SCRAM-SHA-256,SCRAM-SHA-1")
